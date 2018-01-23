@@ -134,3 +134,11 @@ img {
   cursor: pointer;
 }
 
+.panel-title {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.red {
+  color: red;
+}

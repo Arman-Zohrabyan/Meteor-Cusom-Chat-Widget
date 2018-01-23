@@ -8,17 +8,26 @@ export default class Chat extends React.Component {
       message: '',
       chatCollapsed: false,
       data: [],
+      notification: 0,
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.chatData) {
-      this.setState({data: nextProps.chatData.messages})
+      const newData = nextProps.chatData.messages;
+      const {data} = this.state;
+
+      if(this.state.chatCollapsed && newData.length != data.length) {
+        const notification = this.state.notification + 1;
+        this.setState({data: newData, notification});
+      } else {
+        this.setState({data: newData, notification: 0})
+      }
     }
   }
 
   collapse() {
-    this.setState({chatCollapsed: !this.state.chatCollapsed});
+    this.setState({chatCollapsed: !this.state.chatCollapsed, notification: 0});
   }
 
   sendMessage(e) {
@@ -44,6 +53,9 @@ export default class Chat extends React.Component {
                 <div className="panel-heading top-bar">
                   <div className="col-md-8 col-xs-8">
                     <h3 className="panel-title"><span className="glyphicon glyphicon-comment"></span> Chat</h3>
+                    {
+                      this.state.notification ? <span className="red">+{this.state.notification}</span> : ''
+                    }
                   </div>
                   <div className="col-md-4 col-xs-4 text-right">
                     <span
