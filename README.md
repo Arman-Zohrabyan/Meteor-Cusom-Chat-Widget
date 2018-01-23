@@ -1,6 +1,15 @@
 # Meteor+ReactJS
 
-Chat Widget
+## Chat Widget
+
+1. Clone the repo
+2. `npm install`
+3. `meteor`
+
+You can access it at: http://localhost:3000/:[clientId]
+
+
+## Add this code snippet to your website. 
 
 ## CSS
 

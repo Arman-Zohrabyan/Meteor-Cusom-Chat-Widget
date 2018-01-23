@@ -21,7 +21,8 @@ export default class Chat extends React.Component {
     this.setState({chatCollapsed: !this.state.chatCollapsed});
   }
 
-  sendMessage() {
+  sendMessage(e) {
+    e.preventDefault();
     if(this.state.message) {
       this.props.sendMessage(this.props.clientId, this.props.userId, this.state.message);
       this.setState({message: ''});
@@ -95,7 +96,7 @@ export default class Chat extends React.Component {
 
                 </div>
                 <div className="panel-footer">
-                  <div className="input-group">
+                  <form className="input-group">
                     <input
                       id="btn-input"
                       type="text"
@@ -105,9 +106,15 @@ export default class Chat extends React.Component {
                       onChange={this.handleEvent.bind(this)}
                     />
                     <span className="input-group-btn">
-                      <button className="btn btn-primary btn-sm" id="btn-chat" onClick={this.sendMessage.bind(this)}>Send</button>
+                      <input
+                        type="submit"
+                        className="btn btn-primary btn-sm"
+                        id="btn-chat"
+                        onClick={this.sendMessage.bind(this)}
+                        value="Send"
+                      />
                     </span>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
